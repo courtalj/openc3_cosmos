@@ -1,0 +1,15 @@
+# OpenC3 COSMOS MCP Server Plugin
+# Provides Model Context Protocol (MCP) server for AI assistants to access COSMOS target information
+
+VARIABLE mcp_server_port 8765
+VARIABLE mcp_microservice_name OPENC3_MCP_SERVER
+
+# MCP Server Microservice
+# Runs a Python FastAPI server that implements the MCP protocol
+# Allows AI assistants to query target configurations, command definitions, and telemetry definitions
+MICROSERVICE MCP <%= mcp_microservice_name %>
+  CMD python3 mcp_server.py
+  WORK_DIR /plugins/DEFAULT/microservices/mcp_server
+  ENV MCP_PORT <%= mcp_server_port %>
+  ENV COSMOS_SCOPE DEFAULT
+  ENV PYTHONUNBUFFERED 1
